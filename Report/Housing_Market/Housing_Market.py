@@ -1,0 +1,93 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "80283dfd-5a01-437a-b1e4-e8287fbadc81",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import os\n",
+    "import pandas as pd\n",
+    "\n",
+    "class HousingMarket:\n",
+    "    def __init__(self, month, year, TP1,TP2,TP3,TP4,TP5):\n",
+    "        self.TP1=TP1\n",
+    "        self.TP2=TP2\n",
+    "        self.TP3=TP3\n",
+    "        self.TP4=TP4\n",
+    "        self.TP5=TP5\n",
+    "        self.year=year\n",
+    "        self.month=month\n",
+    "        \n",
+    "    def P1(self):\n",
+    "        S1 = \"In \" + Month+\", sales experienced a \"+\" \"+\" annual change, whereas median prices experienced a \"+ \" \" + \" annual change in \"+\" \" +\".\"\n",
+    "        S2 =  str(TP1[\"IL_sells\"][3])+ \" houses were sold in Illinois, changing by \"+ str(TP1[\"AGrowthIL\"][3])+\" from a year ago and \"+ str(TP1[\"MGrowthIL\"][3]) +\" from a month ago.\"\n",
+    "        S3 = \" In the Chicago PMSA, \" +str(TP1[\"CH_sells\"][3])+ \" houses were sold, changing by \" + str(TP1[\"AGrowthCH\"][3])+ \" from a year ago and \" + str(TP1[\"MGrowthCH\"][3]) +\" from a month ago.\"\n",
+    "        S4 = \"The median price was $\" +  \" \"+ \" in Illinois, up \" + \" \"+\" from October last year; the comparable figure for the Chicago PMSA was $\" + \" \"+\", up \"+ \"\" +\"% from \" + Month+ \" last year.\"\n",
+    "        paragraph = S1+S2+S3+S4\n",
+    "        return paragraph\n",
+    "    \n",
+    "    def P2(self):\n",
+    "        S1=\"In \"+Month+\", for the Chicago PMSA, the percentage of foreclosed sales (e.g. REOs) among the total sales was \"+str(100*TP2[\"fratio\"][3])+\". \"\n",
+    "        S2=str(TP2[\"Regular_Sale\"][3])+\" regular sales were made, \"+ str(TP2[\"RS_AGrowth\"][3]) +\"% less than last year. \"+str(TP2[\"ForeCProp\"][3])+\" foreclosed properties were sold, \"+str(TP2[\"FCP_AGrowth\"][3])+\"% more than last year.\"\n",
+    "        S3=\"The median price was $\"+str(TP2[\"MedianPrice\"][3])+\" for regular property sales, up \"+str(100*TP2[\"MP_AGrowth\"][3])+\"% from last year; the comparable figure for the foreclosed properties was $\"+str(TP2[\"MedianPrice_FC\"][3])+\", up \"+str(TP2[\"MPFC_AGrowth\"][3])+\"% from last year. \"\n",
+    "        paragraph = S1+S2+S3\n",
+    "        return paragraph\n",
+    "    \n",
+    "    \n",
+    "    def P3(self):\n",
+    "        S1=\"The sales forecast for \"+PostMonth+\", \"+PPstMonth+\", and \"+PPPtMonth+\" suggests a decrease on a yearly and monthly basis for both Illinois and the Chicago PMSA. \"\n",
+    "        S2=\"Annually for Illinois, the three-month average forecasts point to a decrease in the range of \"+str(TP3[\"TAGrowthIL_LB\"][3])+\" to \"+str(TP3[\"TAGrowthIL_UB\"][3])+\"%; the comparative figures for the Chicago PMSA are a decrease in the range of \"+str(TP3[\"TAGrowthCH_LB\"][3])+\"% to \"+str(TP3[\"TAGrowthIL_UB\"][3])+\"%. \"\n",
+    "        S3=\"On a monthly basis, the three-month average sales are forecast to decrease in the range of \"+str(TP3[\"TMGrowthIL_LB\"][3])+\"% to \"+str(100*TP3[\"TMGrowthIL_UB\"][3])+\"% for Illinois and decrease in the range of \"+str(TP3[\"TMGrowthCH_LB\"][3])+\"% to \"+str(TP3[\"TMGrowthCH_UB\"][3])+\"% for the Chicago PMSA.\"\n",
+    "        paragraph = S1+S2+S3\n",
+    "        return paragraph\n",
+    "    \n",
+    "    def P4(self):\n",
+    "        S1=\"The pending home sales index  is a leading indicator based on contract signings.\"\n",
+    "        S2=\"This October, the number of homes put under contract was less than last year in Illinois and Chicago PMSA. \"\n",
+    "        S3=\"The pending home sales index is 82.5 (2019=100) in Illinois, down -29.3% from a year ago. \"\n",
+    "        S4=\"In the Chicago PMSA, the comparable figure is 77.9 down -33.1% from a year ago. \"  \n",
+    "        S5=\"At the latest average annual pending sales rate, Illinois had enough housing inventory for 2.0 months (remaining the same as last year) . \"\n",
+    "        S6=\"In the Chicago PMSA, the comparable figure was 2.0 months (remaining the same as last year). \"\n",
+    "        S7=\"The lowest price ranges (<$100K) showed the largest decline both in Illinois, and in the Chicago PMSA.\"\n",
+    "        \n",
+    "    def P5(self):\n",
+    "        S1=\"The median price forecast indicates positive annual growth for November, December, and January in both Illinois and the Chicago PMSA. \"\n",
+    "        S2=\"In Illinois, the median price is forecast to change by 0.1% in November, 1.6% in December, and 2.1% in January. \"\n",
+    "        S3=\"For the Chicago PMSA, the comparable figures are 3.4% in November, 3.2% in December, and 3.6% in January. \"\n",
+    "        S4=\"As a complement to the median housing price index (HPI), the SHDRE HPI forecasts a positive growth trend for both Illinois and the Chicago PMSA.  \"\n",
+    "        S5=\"In Illinois, the SHDRE HPI (Jan 2008=1) is forecast to change by 2.3% in November, 1.9% in December, and 2.8% in January. \"\n",
+    "        S6=\"The comparable figures for the Chicago PMSA are 6.8% in November, 5.9% in December, and 6.7% in January. \"\n",
+    "        S7=\"SHDRE HPI takes housing characteristics into account and constructs comparable “baskets” of homes for each month.\"\n",
+    "        \n",
+    "    def P6(self):\n",
+    "        S1=\"In October, the Conference Board Consumer Confidence Index decreased, whereas the University of Michigan Consumer Sentiment Index increased. \"\n",
+    "        S2=\"The Conference Board Consumer Confidence Index survey noted that inflation pressures will remain to be strong headwinds to consumer confidence and spending, which could result in a challenging holiday season for retailers. \"\n",
+    "        S3=\"The University of Michigan Consumer Sentiment Index survey noted that continued declines in sentiment for higher-income consumers is worrisome given how much consumption spending they drive, and their dismal views are unlikely to abate given ongoing turbulence in financial markets.\"\n",
+    "        \n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.13"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
